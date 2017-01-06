@@ -4,6 +4,12 @@ class TicketsController < ApplicationController
 	def create
 		@ticket = Ticket.new(ticket_params)
 		@ticket.passenger = current_user.passenger
+		@ticket.status = "active"
+		if @ticket.save
+			redirect_to airlines_path, notice: "Successfully booked airline!"
+		else
+			render "new"
+		end
 		
 	end
 

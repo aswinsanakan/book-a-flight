@@ -2,13 +2,14 @@
 
 
 <% if current_user.passenger %>
+	<h3><%= link_to "View your tickets", passengers_my_tickets_path %></h3>
 <%else%>
 	<h3><%= link_to "Create your passenger profile", new_passenger_path %></h3>
 <%end%>
 
-Choose an airline :
+<h3>Choose an airline :</h3>
 <% @airlines.each do |airline| %>
 	<ol>
-		<li> <p><%= airline.name %> - <%= airline.model %> - <%= link_to "Book", airline_path(airline) %> </p></li>
+		<li> <p><%= airline.name %> - <%= airline.flight_number %> - <%= link_to "Book", airline_path(airline) %> </p></li>
 	</ol>
 <%end%>

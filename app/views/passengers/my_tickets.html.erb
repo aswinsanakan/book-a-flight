@@ -1,0 +1,9 @@
+<h3>My Tickets</h3>
+
+<div class="container">
+	<% @tickets.order('date_journey DESC').each do |ticket| %>
+		<ol>
+			<li> <p><%= ticket.booking_number %> - <%= ticket.date_journey %> - <%= ticket.airline.name %> - <%= ticket.travel_class %> - <%= ticket.status.capitalize %> </p></li>
+		</ol>
+	<%end%>
+</div>

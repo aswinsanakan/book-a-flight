@@ -3,8 +3,11 @@ Rails.application.routes.draw do
 
   devise_for :users
   resources :airlines
+  get 'passengers/my_tickets'
   resources :passengers
+
   resources :tickets
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

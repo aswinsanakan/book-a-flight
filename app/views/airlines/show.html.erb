@@ -1,4 +1,5 @@
 <h2><%= @airline.name %></h2>
+<h4><%= @airline.flight_number %></h4>
 
 <div class="row">
 	<div class="col-md-4">
@@ -13,8 +14,7 @@
 				<%= f.select :travel_class, ["Gold", "Primary", "Business", "Economy"], class: "form-control" %>	
 			</div>
 
-			<% f.hidden_field :airline_id, value: @airline.id %>
-			<% f.hidden_field :status, value: "active" %>
+			<%= f.hidden_field :airline_id, value: @airline.id %>
 			
 			<div class="actions">
 				<%= f.submit "Book", class: "btn btn-info" %>	

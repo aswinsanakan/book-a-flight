@@ -19,6 +19,12 @@ class PassengersController < ApplicationController
 		end
 	end
 
+	def my_tickets
+		@passenger = current_user.passenger
+		@tickets = @passenger.tickets
+		
+	end
+
 	private
 
 	def passenger_params
