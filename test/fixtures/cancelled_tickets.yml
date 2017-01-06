@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ticket_id: 1
+  date_cancel: 2017-01-06
+
+two:
+  ticket_id: 1
+  date_cancel: 2017-01-06
