@@ -1,0 +1,24 @@
+<h2><%= @airline.name %></h2>
+
+<div class="row">
+	<div class="col-md-4">
+		<%= form_for @ticket do |f| %>
+			<div class="form-group">
+				<%= f.label "Choose date of journey :" %>
+				<%= f.date_field :date_journey, autofocus: true, class: "form-control" %>	
+			</div>
+
+			<div class="form-group">
+				<%= f.label "Choose class :" %>
+				<%= f.select :travel_class, ["Gold", "Primary", "Business", "Economy"], class: "form-control" %>	
+			</div>
+
+			<% f.hidden_field :airline_id, value: @airline.id %>
+			<% f.hidden_field :status, value: "active" %>
+			
+			<div class="actions">
+				<%= f.submit "Book", class: "btn btn-info" %>	
+			</div>
+		<%end%>		
+	</div>
+</div>
