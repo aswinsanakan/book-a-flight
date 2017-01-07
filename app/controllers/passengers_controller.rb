@@ -26,7 +26,7 @@ class PassengersController < ApplicationController
 			@ticket.cancel_ticket
 		end
 		@passenger = current_user.passenger
-		if @passenger.tickets
+		if !(@passenger.nil?)
 			@tickets = @passenger.tickets
 		end
 	end
