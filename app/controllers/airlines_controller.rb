@@ -9,6 +9,7 @@ class AirlinesController < ApplicationController
 	end
 
 	def show
+		@passenger = current_user.passenger
 		@airline = Airline.find(params[:id])
 		@ticket = Ticket.new
 	end

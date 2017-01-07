@@ -1,3 +1,8 @@
+<% if @passenger.nil? %>
+<h3>You have to create your passenger profile first!</h3>
+	<a href="<%= new_passenger_path %>" class="btn btn-success">Create your Profile</a>
+<%end%>
+
 <h2><%= @airline.name %></h2>
 <h4><%= @airline.flight_number %></h4>
 

@@ -4,6 +4,7 @@ class Ticket < ActiveRecord::Base
 	belongs_to :passenger
 
 	validates_uniqueness_of :booking_number
+	validate :passenger_present?
 
 	before_create :reissue_ticket, :generate_booking_number
 	after_create :update_tickets_issued
@@ -14,6 +15,12 @@ class Ticket < ActiveRecord::Base
 	end
 
 	private
+
+	def passenger_present?
+		if self.passenger.nil?
+			errors.add(:passenger_id,"Create your passenger profile first!")
+		end
+	end
 
 	def reissue_ticket
 		Ticket.all.each do |ticket|

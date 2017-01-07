@@ -8,7 +8,7 @@ class TicketsController < ApplicationController
 		if @ticket.save
 			redirect_to airlines_path, notice: "Successfully booked airline!"
 		else
-			render "new"
+			redirect_to airline_path(@ticket.airline)
 		end
 		
 	end
