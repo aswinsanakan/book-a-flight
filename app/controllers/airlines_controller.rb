@@ -4,6 +4,7 @@ class AirlinesController < ApplicationController
 	def index
 		@airlines = Airline.all
 		@user = current_user
+		@ticket = Ticket.new
 		
 	end
 

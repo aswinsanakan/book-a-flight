@@ -1,22 +1,85 @@
+
 <h2>Welcome <%= @user.username %>!</h2>
 
 
 <% if current_user.passenger %>
 	<h3>
-		<p><%= link_to "View your tickets", passengers_my_tickets_path %>
+		<p> <a href="<%= passengers_my_tickets_path %>" class="btn btn-default">View your tickets
 		<% if current_user.passenger.tickets %>
-			(<%= current_user.passenger.tickets.count %>)</p>
+			<span class="badge"><%= current_user.passenger.tickets.size %></span></a></p>
 		<%else%>
-			(0)</p>
+			(0)</a></p>
 		<%end%>
 	</h3>
 <%else%>
 	<h3><%= link_to "Create your passenger profile", new_passenger_path %></h3>
 <%end%>
 
-<h3>Choose an airline :</h3>
-	<ol>
-		<% @airlines.each do |airline| %>
-		<li> <p><%= airline.name %> - <%= airline.flight_number %> - <%= link_to "Book", airline_path(airline) %> </p></li>
-		<%end%>
-	</ol>
+
+<div class="row">
+	<% @airlines.each do |airline| %>
+		
+		<div class="col-md-6">
+			<div class="card">
+				<div class="row">
+					<div class="col-md-3">
+						<%= image_tag('flight_img.png', width: "120px", class: "img-responsive")  %>
+					</div>
+					<div class="col-md-6">
+					    <h4><b><%= airline.name %></b></h4> 
+					    <p><%= airline.flight_number %></p> 
+						
+					</div>
+					<div class="col-md-3" style="margin-top:10px">
+						
+						<!-- Modal -->
+						<div class="modal fade" id="book<%= airline.id %>Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						  <div class="modal-dialog" role="document">
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						        <h4 class="modal-title well well-sm" id="myModalLabel"> <b><%= airline.name %></b> - <small><%= airline.flight_number %></small> </h4>
+						      </div>
+						      <div class="modal-body">
+						        <div class="row">
+									<div class="col-md-6 col-md-offset-3">
+										<%= form_for @ticket do |f| %>
+											<div class="form-group">
+												<%= f.label "Choose date of journey :" %>
+												<%= f.date_field :date_journey, autofocus: true, class: "form-control" %>	
+											</div>
+
+											<div class="form-group">
+												<%= f.label "Choose class :" %>
+												<%= f.select :travel_class, ["Gold", "Primary", "Business", "Economy"], class: "form-control" %>	
+											</div>
+
+											<%= f.hidden_field :airline_id, value: airline.id %>
+											
+											<div class="actions text-center">
+												<%= f.submit "Book", class: "btn btn-danger" %>	
+											</div>
+										<%end%>		
+									</div>
+								</div>
+						      </div>
+						      <div class="modal-footer">
+						        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						       
+						      </div>
+						    </div>
+						  </div>
+						</div>
+
+						<p>
+						
+						<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#book<%= airline.id %>Modal" style="margin-top: 10px">	
+							Book
+						</button></p>
+					</div>
+				</div>
+			</div>  
+		</div>
+	<%end%>	
+</div>
+

@@ -8,20 +8,82 @@
 </head>
 <body>
 
-<div class="container">
-	<% if user_signed_in? %>
-          Howdy <%= current_user.username %> ! - 
-        <%= link_to "Account Setting", edit_user_registration_path %> - <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="<%= root_path %>">Book-a-Flight</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+
+        <% if current_page? "/airlines"%>
+          <li class="active">
+        <%else%>
+          <li>
+        <%end%>
+        <a href="/airlines">Airlines <span class="sr-only">(current)</span></a></li>
+        
+        <% if current_page? "/passengers/my_tickets"%>
+          <li class="active">
+        <%else%>
+          <li>
+        <%end%>
+            <a href="/passengers/my_tickets">My Tickets</a>
+        </li>
+        
+      </ul>
+      
+      <ul class="nav navbar-nav navbar-right">
+
+          <% if user_signed_in? %>
+         <li > <a > <%= current_user.username %> </a> </li> 
+         <li>
+        <%= link_to "Account Setting", edit_user_registration_path %> </li>
+        <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
       <% else %>
-        <%= link_to "Login", new_user_session_path %> - <%= link_to "Register", new_user_registration_path %>
+        <li><%= link_to "Login", new_user_session_path %></li>
+        <li><%= link_to "Register", new_user_registration_path %></li>
       <% end %>
-</div>
-
+          
+        </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
 
 <div class="container">
-	<p class="notice"><%= notice %></p>
-	<p class="alert"><%= alert %></p>
+	
 
+<% if notice %> 
+    <div class="row">
+        <ul class="nav navbar-nav " style="margin-top:15px">
+          <li>
+              
+              <b style="color:#03CEA4"><%= notice %></b>  
+              
+            </li>
+        </ul>
+    </div>
+<%end%>
+
+<% if alert %> 
+    <div class="row">
+        <ul class="nav navbar-nav " style="margin-top:15px">
+          <li>
+               <b style="color:#FB4D3D"><%= alert %></b> 
+              
+          </li>
+        </ul>
+    </div>
+<%end%>
 	
 	
 	<%= yield %>

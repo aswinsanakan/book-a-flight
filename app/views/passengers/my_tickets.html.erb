@@ -1,17 +1,38 @@
 <h3>My Tickets</h3>
 
-<% if @tickets %>
-	<div class="container">
-		<ol>
-			<% @tickets.order('date_journey DESC').each do |ticket| %>
-			<li> <p><%= ticket.booking_number %> - <%= ticket.date_journey %> - <%= ticket.airline.name %> - <%= ticket.travel_class %> - <%= ticket.status.capitalize %> 
-				<% if !(ticket.status == "Cancelled") %>
-					- <%= link_to "Cancel Ticket", passengers_my_tickets_path, method: ticket.cancel_ticket %>
-				<%end%>
-					</p> </li>
-			<%end%>
-		</ol>
+<% if !(@tickets.size == 0) %>
+	<div class="row">
+		<% @tickets.order('date_journey DESC').each do |ticket| %>
+		<div class="col-md-4">
+			<div class="card ">
+			  	<div style="padding: 20px 0 20px 20px; background-color: #577590; color: white; height: 203px">
+			  		<h4><b><%= ticket.airline.name %> - </b><%= ticket.travel_class %><b></b></h4>
+			  		<p> <b>Status : </b><%= ticket.status.capitalize %> </p> 
+				    <p> <b>Booking Reference :</b> <%= ticket.booking_number %></p>
+				    
+
+				    <p> <b>Journey :</b> <%= ticket.date_journey %></p>
+				  	
+				  
+				 
+				  	<% if !(ticket.status == "Cancelled") %>
+						<%= form_tag(passengers_my_tickets_path, method: "get", class: "form-inline") do %>
+							<%= hidden_field_tag :cancel_ticket, ticket.id, class: "form-control" %>
+							<%= submit_tag "Cancel Ticket",class: "btn btn-default" %>
+						<% end %>
+						
+					<%end%>
+			  	</div>
+				  	
+				  
+
+			     
+			  
+			</div>
+		</div>
+		<%end%>
 	</div>
 <%else%>
-	<h4>No tickets booked!</h4>
+	<h4>No tickets booked!</h4> 
+	<a href="/airlines" class="btn btn-info">Book Now</a>
 <%end%>

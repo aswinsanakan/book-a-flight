@@ -20,6 +20,11 @@ class PassengersController < ApplicationController
 	end
 
 	def my_tickets
+		
+		if params[:cancel_ticket]
+			@ticket = Ticket.find(params[:cancel_ticket])
+			@ticket.cancel_ticket
+		end
 		@passenger = current_user.passenger
 		if @passenger.tickets
 			@tickets = @passenger.tickets
