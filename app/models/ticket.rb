@@ -1,11 +1,11 @@
 class Ticket < ActiveRecord::Base
-	has_many :cancelled_tickets
+	has_one :cancelled_ticket
 	belongs_to :airline
 	belongs_to :passenger
 
 	validates_uniqueness_of :booking_number
 
-	before_create :generate_booking_number
+	before_create :reissue_ticket, :generate_booking_number
 	after_create :update_tickets_issued
 
 	def cancel_ticket
@@ -14,6 +14,21 @@ class Ticket < ActiveRecord::Base
 	end
 
 	private
+
+	def reissue_ticket
+		Ticket.all.each do |ticket|
+			if ticket.date_journey < (Date.today - 2.years)
+				ticket.destroy
+			end
+			if !(ticket.cancelled_ticket.nil?)
+				if ticket.cancelled_ticket.date_cancel < (Date.today - 3.months)
+					cancelled_ticket = ticket.cancelled_ticket
+					cancelled_ticket.destroy
+					ticket.destroy
+				end
+			end
+		end
+	end
 
 	def generate_booking_number
 		flag = 0
