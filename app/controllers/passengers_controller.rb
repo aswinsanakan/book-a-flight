@@ -21,8 +21,9 @@ class PassengersController < ApplicationController
 
 	def my_tickets
 		@passenger = current_user.passenger
-		@tickets = @passenger.tickets
-		
+		if @passenger.tickets
+			@tickets = @passenger.tickets
+		end
 	end
 
 	private

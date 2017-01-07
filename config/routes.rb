@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   devise_for :users
   resources :airlines
   get 'passengers/my_tickets'
+  post 'passengers/my_tickets'
   resources :passengers
 
   resources :tickets

@@ -1,9 +1,17 @@
 <h3>My Tickets</h3>
 
-<div class="container">
-	<% @tickets.order('date_journey DESC').each do |ticket| %>
+<% if @tickets %>
+	<div class="container">
 		<ol>
-			<li> <p><%= ticket.booking_number %> - <%= ticket.date_journey %> - <%= ticket.airline.name %> - <%= ticket.travel_class %> - <%= ticket.status.capitalize %> </p></li>
+			<% @tickets.order('date_journey DESC').each do |ticket| %>
+			<li> <p><%= ticket.booking_number %> - <%= ticket.date_journey %> - <%= ticket.airline.name %> - <%= ticket.travel_class %> - <%= ticket.status.capitalize %> 
+				<% if !(ticket.status == "Cancelled") %>
+					- <%= link_to "Cancel Ticket", passengers_my_tickets_path, method: ticket.cancel_ticket %>
+				<%end%>
+					</p> </li>
+			<%end%>
 		</ol>
-	<%end%>
-</div>
+	</div>
+<%else%>
+	<h4>No tickets booked!</h4>
+<%end%>
