@@ -5,4 +5,5 @@ task :clear_data => :environment do
 	CancelledTicket.delete_all
 	Passenger.delete_all
 	User.delete_all
+	Meal.delete_all
 end

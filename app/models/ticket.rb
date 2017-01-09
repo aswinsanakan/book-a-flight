@@ -2,6 +2,7 @@ class Ticket < ActiveRecord::Base
 	has_one :cancelled_ticket
 	belongs_to :airline
 	belongs_to :passenger
+	belongs_to :meal
 
 	validates_uniqueness_of :booking_number
 	validate :passenger_present?

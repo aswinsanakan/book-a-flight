@@ -1,37 +1,24 @@
+
+
 <% if @passenger.nil? %>
 	<h3>You have to create your passenger profile first!</h3>
 	<a href="<%= new_passenger_path %>" class="btn btn-success">Create your Profile</a>
 
 <%else%>
 <h3>My Tickets</h3>
-<% if !(@tickets.size == 0) %>
-<ul class="nav nav-tabs">
-	<% @tickets.pluck(:travel_class).uniq.each do |t_class| %>
-    	<li> <a href="#<%= t_class %>" data-target="#<%= t_class %>" data-toggle="tab"><%= t_class %> Class</a></li>
-    <%end%>
-</ul>
 
-<div class="tab-content">
-    	<% @tickets.pluck(:travel_class).uniq.each do |t_class| %>
-    	<div class="tab-pane active fade in" id="<%= t_class %>">
-    		<%  tickets = @tickets.where('travel_class = ?', t_class) %>
-    		<% tickets.order('date_journey DESC').each do |ticket|%>
-    		<div class="col-md-4">
+<% if !(@tickets.size == 0) %>
+	<div class="row">
+		<% @tickets.order('date_journey DESC').each do |ticket| %>
+		<div class="col-md-4">
 			<div class="card ">
-			  	<div style="padding: 20px 0 20px 20px; background-color: #577590; color: white; height: 233px">
-			  		<h4><b><%= ticket.airline.name %> - </b><%= ticket.travel_class %> Class<b></b></h4>
+			  	<div style="padding: 20px 0 20px 20px; background-color: #577590; color: white; height: 203px">
+			  		<h4><b><%= ticket.airline.name %> - </b><%= ticket.travel_class %><b></b></h4>
 			  		<p> <b>Status : </b><%= ticket.status.capitalize %> </p> 
 				    <p> <b>Booking Reference :</b> <%= ticket.booking_number %></p>
 				    
 
 				    <p> <b>Journey :</b> <%= ticket.date_journey.strftime("%d %b %Y") %></p>
-				    <p><b>Meal :</b>
-						<%if ticket.meal.nil?%>
-							None
-						<%else%>
-							<%= ticket.meal.meal_type %>
-						<%end%>
-				    </p>
 				  	
 				  
 				 
@@ -43,12 +30,15 @@
 						
 					<%end%>
 			  	</div>
+				  	
+				  
+
+			     
+			  
 			</div>
-			</div>
-			<%end%>
 		</div>
 		<%end%>
-</div>
+	</div>
 <%else%>
 	<h4>No tickets booked!</h4> 
 	<a href="/airlines" class="btn btn-info">Book Now</a>
@@ -56,4 +46,3 @@
 
 
 <%end%>
-        

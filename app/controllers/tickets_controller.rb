@@ -14,6 +14,6 @@ class TicketsController < ApplicationController
 	end
 
 	def ticket_params
-		params[:ticket].permit(:booking_number, :passenger_id, :airline_id, :travel_class, :date_journey, :status)
+		params[:ticket].permit(:meal_id,:booking_number, :passenger_id, :airline_id, :travel_class, :date_journey, :status)
 	end
 end
