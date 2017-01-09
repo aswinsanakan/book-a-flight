@@ -6,4 +6,5 @@ task :clear_data => :environment do
 	Passenger.delete_all
 	User.delete_all
 	Meal.delete_all
+	TicketMeal.delete_all
 end

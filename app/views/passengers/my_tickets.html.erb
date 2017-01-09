@@ -26,10 +26,11 @@
 
 				    <p> <b>Journey :</b> <%= ticket.date_journey.strftime("%d %b %Y") %></p>
 				    <p><b>Meal :</b>
-						<%if ticket.meal.nil?%>
+						<%if ticket.meals.nil?%>
 							None
 						<%else%>
-							<%= ticket.meal.meal_type %>
+							<% meals = ticket.meals.pluck(:meal_type).join(', ') %>
+							<%= meals %>
 						<%end%>
 				    </p>
 				  	

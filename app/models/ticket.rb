@@ -1,10 +1,12 @@
 class Ticket < ActiveRecord::Base
 	has_one :cancelled_ticket
+	has_many :ticket_meals 
+	has_many :meals, through: :ticket_meals
 	belongs_to :airline
 	belongs_to :passenger
-	belongs_to :meal
 
 	validates_uniqueness_of :booking_number
+	validates_presence_of :date_journey, :travel_class
 	validate :passenger_present?
 
 	before_create :reissue_ticket, :generate_booking_number

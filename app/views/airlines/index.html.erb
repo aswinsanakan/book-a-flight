@@ -44,21 +44,57 @@
 						        <div class="row">
 									<div class="col-md-6 col-md-offset-3">
 										<%= form_for @ticket do |f| %>
+										
+											<script>
+												$(document).ready(function(){
+													$("#dateJourney<%= airline.id %>").datepicker({
+														"dateFormat" : "yy-mm-dd",
+														"minDate" : 0 ,
+														"maxDate" : 15 
+													})
+												})
+											</script>
 											<div class="form-group">
-												<%= f.label "Choose date of journey :" %>
-												<%= f.date_field :date_journey, autofocus: true, class: "form-control" %>	
+												<%= f.label "Date of journey" %> <br>
+												<%= f.text_field :date_journey, id: "dateJourney" + airline.id.to_s, class: "form-control" %>	
 											</div>
 
 
 											<div class="form-group">
-												<%= f.label "Choose class :" %>
-												<%= f.select :travel_class, ["First", "Business", "Economy"], class: "form-control" %>	
+												<%= f.label :travel_class %> <br>
+												
+													<label class="radio-inline">
+														<%= f.radio_button :travel_class, "First" %> First Class
+													</label> 
+												
+
+												
+													<label class="radio-inline">
+														<%= f.radio_button :travel_class, "Business" %> Business Class
+													</label> <br>
+												
+
+												
+													<label class="radio-inline">
+														<%= f.radio_button :travel_class, "Economy" %> Economy Class
+													</label> 
 											</div>
 
-											<div class="form-group">
-												<%= f.label :meal_id %>
-												<%= f.collection_select :meal_id, Meal.all, :id, :meal_type, {prompt: "Choose Meal (*optional)"}, {class: "chosen-select"} %>
+											
+
+											<div class="form-group" >
+												<%= f.label "Meal (Max 2 nos)" %> <br>
+												<%= f.collection_select :meal_ids, Meal.all, :id, :meal_type,{prompt: ""}, {class: "chosen-select", multiple: true} %>
 											</div>
+
+											<script>
+												 $(".chosen-select").chosen({
+												    max_selected_options: 2,
+												    width: "100%",
+												    placeholder_text_multiple: "Choose any 2 meal!"
+
+												  });
+											</script>
 
 											<%= f.hidden_field :airline_id, value: airline.id %>
 											
@@ -88,4 +124,5 @@
 		</div>
 	<%end%>	
 </div>
+
 
