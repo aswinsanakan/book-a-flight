@@ -5,6 +5,8 @@ gem 'bootstrap-sass', '~> 3.3.6'
 gem 'devise'
 gem 'faker'
 gem 'chosen-rails'
+gem 'rails-assets-sweetalert2', source: 'https://rails-assets.org'
+gem 'sweet-alert-confirm'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.7.1'

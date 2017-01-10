@@ -1,7 +1,7 @@
 task :setup_data => :environment do 
 
-	User.create(username: "Aswin Sanakan", email: "aswin@gmail.com", password: "aswin123")
-	
+	user = User.create(username: "Aswin S", email: "aswin@gmail.com", password: "aswin123")
+	Passenger.create(user_id: user.id, name: "Aswin Sanakan", address: "Pulickal House, Kerala, 683562")
 
 
 	airlines = ["Air India", "Spice Jet","U.S Airways", "Continental","Boeing 747","Trans World"]

@@ -13,4 +13,5 @@ class AirlinesController < ApplicationController
 		@airline = Airline.find(params[:id])
 		@ticket = Ticket.new
 	end
+
 end

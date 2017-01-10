@@ -14,7 +14,9 @@ class Ticket < ActiveRecord::Base
 
 	def cancel_ticket
 		self.update_attributes(status: "Cancelled")
-		CancelledTicket.create(ticket_id: self.id, date_cancel: Date.today)
+		if !(CancelledTicket.all.pluck(:ticket_id).include? self.id) 
+			CancelledTicket.create(ticket_id: self.id, date_cancel: Date.today)
+		end
 	end
 
 	private
