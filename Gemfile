@@ -7,6 +7,8 @@ gem 'faker'
 gem 'chosen-rails'
 gem 'rails-assets-sweetalert2', source: 'https://rails-assets.org'
 gem 'sweet-alert-confirm'
+gem 'rabl'
+gem 'httparty'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.7.1'

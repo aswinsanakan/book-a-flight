@@ -5,6 +5,11 @@ class TicketsController < ApplicationController
 		@ticket = Ticket.new(ticket_params)
 		@ticket.passenger = current_user.passenger
 		@ticket.status = "active"
+
+		urlstring = 'http://bookflight-api.herokuapp.com/api/bookings/generate_reference'
+		response = HTTParty.get(urlstring).parsed_response
+		@ticket.booking_number = response["booking"]["reference_num"]
+		
 		if @ticket.save
 			redirect_to airlines_path, notice: "Successfully booked airline!"
 		else

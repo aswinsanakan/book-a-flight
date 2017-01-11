@@ -9,7 +9,7 @@ class Ticket < ActiveRecord::Base
 	validates_presence_of :date_journey, :travel_class
 	validate :passenger_present?
 
-	before_create :reissue_ticket, :generate_booking_number
+	before_create :reissue_ticket
 	after_create :update_tickets_issued
 
 	def cancel_ticket
@@ -42,6 +42,9 @@ class Ticket < ActiveRecord::Base
 		end
 	end
 
+
+=begin
+	#Generate Booking Reference (presently added to API)
 	def generate_booking_number
 		flag = 0
 		while flag==0
@@ -65,6 +68,7 @@ class Ticket < ActiveRecord::Base
 			end
 		end
 	end
+=end
 
 	def update_tickets_issued
 		airline_ticket = self.airline.airline_ticket
