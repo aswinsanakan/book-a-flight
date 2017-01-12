@@ -43,6 +43,29 @@
         </li>
         
       </ul>
+
+      <% if notice %> 
+          <ul class="nav navbar-nav " style="margin-top:15px">
+                <li>
+                    
+                    <b style="color:#03CEA4"><%= notice %></b>  
+                    
+                  </li>
+              </ul>
+          
+      <%end%>
+
+      <% if alert %> 
+          
+              <ul class="nav navbar-nav " style="margin-top:15px">
+                <li>
+                     <b style="color:#FB4D3D"><%= alert %></b> 
+                    
+                </li>
+              </ul>
+          
+      <%end%>
+  
       
       <ul class="nav navbar-nav navbar-right">
 
@@ -64,29 +87,7 @@
 <div class="container">
 	
 
-<% if notice %> 
-    <div class="row">
-        <ul class="nav navbar-nav " style="margin-top:15px">
-          <li>
-              
-              <b style="color:#03CEA4"><%= notice %></b>  
-              
-            </li>
-        </ul>
-    </div>
-<%end%>
 
-<% if alert %> 
-    <div class="row">
-        <ul class="nav navbar-nav " style="margin-top:15px">
-          <li>
-               <b style="color:#FB4D3D"><%= alert %></b> 
-              
-          </li>
-        </ul>
-    </div>
-<%end%>
-	
 	
 	<%= yield %>
 </div>
